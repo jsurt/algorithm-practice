@@ -92,7 +92,7 @@ const reverse = list => {
   return reversedHead;
 };
 
-//console.log(reverse(linkedList));
+console.log(reverse(linkedList));
 
 // Detect a cycle in a linked list:
 function containsCycle(firstNode) {
