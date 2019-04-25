@@ -49,12 +49,12 @@ listWithCycle.addToStart(node4);
 listWithCycle.addToEnd(node5);
 listWithCycle.addToEnd(node2);
 //Writing a function to detect a cycle
-const detectCycle = list => {
-  if (!list.head || !list.head.next) {
+const detectCycle = head => {
+  if (!head || !head.next) {
     return false;
   }
-  let slow = list.head;
-  let fast = list.head;
+  let slow = head;
+  let fast = head;
   while (fast && fast.next) {
     slow = slow.next;
     fast = fast.next.next;
@@ -65,7 +65,7 @@ const detectCycle = list => {
   return false;
 };
 
-detectCycle(listWithCycle);
+detectCycle(listWithCycle.head);
 
 //Reverse a linked list
 const listToReverse = new LinkedList();
@@ -81,11 +81,63 @@ listToReverse.addToEnd(nodeThree);
 listToReverse.addToEnd(nodeFour);
 listToReverse.addToEnd(nodeFive);
 listToReverse.addToEnd(nodeSix);
-console.log(listToReverse);
 
-const reverse = list => {};
+const reverse = head => {
+  let node = head, previous, temp;
+  while (node) {
+    temp = node.next;
+    node.next = previous;
+    previous = node;
+    node = temp;
+  }
+  return previous;
+};
 
-reverse(listToReverse.head);
-console.log(reverse(listToReverse.head));
+const reversedList = reverse(listToReverse.head);
 
-console.log(listToReverse);
+//Reverse the second half of a linked list and attach to the first
+const anotherList = new LinkedList();
+let newNodeOne = new Node(7);
+let newNodeTwo = new Node(2);
+let newNodeThree = new Node(9);
+let newNodeFour = new Node(8);
+let newNodeFive = new Node(5);
+let newNodeSix = new Node(10);
+let newNodeSeven = new Node(4);
+anotherList.addToEnd(newNodeOne);
+anotherList.addToEnd(newNodeTwo);
+anotherList.addToEnd(newNodeThree);
+anotherList.addToEnd(newNodeFour);
+anotherList.addToEnd(newNodeFive);
+anotherList.addToEnd(newNodeSix);
+anotherList.addToEnd(newNodeSeven);
+console.log(anotherList);
+
+const reverseAttach = list => {
+  let length = 0; 
+  let node = list.head;
+  while(node) {
+    length++;
+    node = node.next;
+  }
+  let middle = Math.floor(length/2);
+  console.log(middle);
+  node = list.head;
+  for(let i = 0; i < middle; i++) {
+    console.log(node);
+    node = node.next;
+  }
+  let temp;
+  let previous;
+  while(node) {
+    temp = node.next;
+    node.next = previous;
+    previous = node;
+    node = temp;
+  }
+  console.log(list.head);
+  console.log(previous)
+  return node;
+}
+
+reverseAttach(anotherList);
